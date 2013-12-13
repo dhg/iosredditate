@@ -94,7 +94,7 @@ nav .view-options a {
 }
 .post .chat-icon {
 	display: inline-block;
-	background: url(/images/comment-icon.png);
+	background: url(../images/comment-icon.png);
 	width: 14px;
 	height: 14px;
 	background-size: 100%;
