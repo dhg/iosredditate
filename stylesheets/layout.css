@@ -1,0 +1,302 @@
+/*
+* Redditate
+* Copyright 2011, Dave Gamache
+* www.redditate.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 10/01/2011
+*/
+
+html {
+	min-height: 100%;
+}
+body {
+	padding-top: 76px;
+	min-height: 100%;
+	overflow-y: scroll;
+}
+.container {
+	width: 90%;
+	max-width: 880px;
+	margin: 0 auto;
+}
+
+/* Nav
+================================================== */
+nav {
+	width: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	background: #fff;
+	z-index: 4;
+	padding-top: 18px;
+	padding-bottom: 18px;
+	border-bottom: 1px solid #e3e6e9;
+}
+nav h1 {
+	text-align: center;
+	font-size: 13px;
+	text-transform: uppercase;
+	letter-spacing: 6px;
+	color: #222;
+	line-height: 1;
+	margin-bottom: 0;
+}
+nav h1 strong {
+	font-size: 24px;
+	color: #222;
+}
+nav .subreddit {
+	cursor: pointer;
+}
+nav .subreddit:hover {
+	color: #333;
+}
+nav .subreddit:hover .carrot{
+	border-top-color: #333;
+}
+nav .view-options {
+	float: right;
+	line-height: 50px;
+}
+nav .view-options a {
+	text-decoration: none;
+}
+.fullview nav .fullview,
+.listview nav .listview {
+	font-weight: bold;
+}
+
+/* Posts
+================================================== */
+.post {
+	padding-bottom: 20px;
+	margin-top: 16px;
+	border-bottom: 1px solid #eee;
+	overflow: hidden;
+}
+.posts .post:last-child {
+	border-bottom: 0;
+}
+.post .metadata,
+.post .metadata a {
+	font-family: "adelle-sans", "Georgia", "Times New Roman", serif;
+	color: #999;
+	font-size: 12px;
+}
+.post .metadata a:hover {
+	color: #333;
+}
+.metadata + iframe,
+.metadata + .image-embed {
+	margin-top: 10px;
+}
+.post .chat-icon {
+	display: inline-block;
+	background: url(/images/comment-icon.png);
+	width: 14px;
+	height: 14px;
+	background-size: 100%;
+	opacity: .6;
+	vertical-align: -3px;
+	margin-right: 3px;
+}
+.post .score {
+	font-weight: bold;
+	display: none;
+}
+.post .image-embed {
+	display: inline-block;
+}
+.post .image-embed img {
+	max-width: 880px;
+	max-height: 501px;
+	cursor:url(../images/zoom-in-icon.png), -moz-zoom-in;
+}
+.post img.fullwidth {
+	max-height: none;
+	cursor:url(../images/zoom-out-icon.png), -moz-zoom-out;
+}
+.post .image-embed img.not-resizeable {
+	cursor: default;
+}
+.post .thumbnail-embed {
+	display: none;
+}
+h2 a {
+	text-decoration: none;
+	font-weight: 300;
+}
+
+/* Album
+================================================== */
+.imgur-album {
+	display: inline-block;
+	position: relative;
+}
+.imgur-album li {
+	display: none;
+	position: relative;
+}
+.imgur-album li:first-of-type {
+	display: block;
+}
+.imgur-album.show-album li {
+	display: block;
+}
+.imgur-album.show-album .open-album-wrapper {
+	display: none;
+}
+.image-count {
+	color: #fff;
+	display: none;
+	font-family: "Adelle", "Georgia", "Times New Roman", serif;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	text-shadow: 1px 1px 1px rgba(0,0,0,.8);
+	opacity: .6;
+}
+.imgur-album .open-album-wrapper {
+	background: rgba(0,0,0,.8);
+	-webkit-border-radius: 3px;
+	        border-radius: 3px;
+	display: block;
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	z-index: 2;
+}
+.imgur-album .open-album-wrapper .open-album {
+	text-decoration: none;
+	color: #fff;
+	font-size: 10px;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding: 2px 8px;
+	display: block;
+}
+.imgur-caption {
+	display: none;
+	font-size: 13px;
+}
+
+
+/* Loading screens
+================================================== */
+.wash {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	background-color: rgba(255,255,255,.7);
+}
+.wash #loading {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -10px;
+	margin-left: -10px;
+}
+
+
+.loadmore-button {
+	display: none;
+	position: relative;
+	border: 1px solid #aaa;
+	background: #eee;
+	font-weight: bold;
+	text-align: center;
+	padding: 14px 0;
+	margin-bottom: 40px;
+	-webkit-border-radius: 6px;
+	   -moz-border-radius: 6px;
+	        border-radius: 6px;
+}
+.loadmore-button #spinner {
+	display: none;
+	position: absolute;
+}
+.loadmore-button.loading #spinner {
+	display: block;
+	left: 50%;
+	top: 50%;
+}
+.loadmore-button.loading #spinner > div {
+	width: 0;
+}
+.loadmore-button.loading {
+	text-indent: -9999px;
+}
+
+
+@media only screen and (max-width: 880px) {
+	.post .image-embed img {
+		max-width: 100%;
+		height: auto;
+		cursor: default;
+	}
+	iframe {
+		max-width: 100%;
+	}
+	.subreddit-picker .one-quarter.column,
+	.subreddit-picker .one-quarter.column:last-child {
+		width: 48%;
+		margin-left: 2%;
+	}
+	.subreddit-picker .one-quarter.column:nth-child(odd) {
+		margin-left: 0;
+	}
+}
+@media only screen and (max-width: 500px) {
+	body {
+		padding-top: 50px;
+	}
+	nav h1 {
+		width: 100%;
+		float: none;
+	}
+	nav .view-options,
+	.subreddit-picker-open .subreddit-close-button {
+		display: block;
+		width: 100%;
+		line-height: 10px;
+		margin-bottom: 10px;
+	}
+	.subreddit-hint p {
+		text-align: left;
+	}
+	.subreddit-picker {
+		position: relative;
+		height: auto;
+		padding-bottom: 30px;
+	}
+	.subreddit-picker .container {
+		padding-top: 30px;
+	}
+	.subreddit-picker .one-quarter.column {
+		width: 100%;
+		margin-left: 0;
+	}
+}
+@media only screen and (max-device-width: 500px) {
+	.post .image-embed img {
+		max-height: 100000px;
+	}
+}
+@media only screen and (max-device-width: 1025px) {
+	.subreddit-picker {
+		position: relative;
+		height: auto;
+		padding-bottom: 30px;
+	}
+	nav {
+		position: absolute;
+	}
+	.loadmore-button {
+		display: block;
+	}
+}

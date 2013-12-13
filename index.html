@@ -1,0 +1,188 @@
+<!--
+* Redditate
+* Copyright 2011, Dave Gamache
+* www.redditate.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 10/01/2011
+-->
+
+<!doctype html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8" />
+	<title>Redditate: Top News</title>
+	<meta name="description" content="">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="author" content="Dave Gamache - www.davegamache.com - www.twitter.com/dhg">
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="stylesheets/base.css">
+	<link rel="stylesheet" href="stylesheets/layout.css">
+
+
+	<!-- Favicon
+  ================================================== -->
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114x114.png">
+
+	<!-- JS
+	================================================== -->
+	<script type="text/javascript" src="//use.typekit.net/pla4pcy.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	<script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+	<script src='javascripts/handlebars.1.0.0.beta.3.js'></script>
+
+
+
+	<!-- HTML template for post
+	================================================== -->
+	<!-- {{score}} points |  |   {{domain}}-->
+	<script id="postTemplate" type="text/x-handlebars-template">
+		<div class="post" id="{{name}}">
+			{{#hasThumbnail thumbnail url}}
+				{{thumbnail}}
+			{{/hasThumbnail}}
+			<div class="content">
+				<h2 class="remove-bottom">
+					<a class="post-title" href="{{url}}" target="_blank">{{title}}</a>
+				</h2>
+				<div class="metadata">
+					<span class="score">{{score}}</span>
+					<a class="permalink" href="http://www.reddit.com{{permalink}}" target="_blank">
+						<span class="chat-icon"></span>{{num_comments}}
+					</a>
+					{{#isAlbum url}}
+					{{/isAlbum}}
+				</div>
+				{{#hasImage url}}
+					{{url}}
+				{{/hasImage}}
+				{{#hasYoutube url}}
+					{{url}}
+				{{/hasYoutube}}
+			</div>
+		</div>
+	</script>
+	<script id="imgurAlbumTemplate" type="text/x-handlebars-template">
+		<ul id="album-{{cover}}" class="imgur-album">
+			{{#each images}}
+				<li>
+					<a class="image-embed">
+						<img src="images/grey.gif" data-src="{{links.large_thumbnail}}" alt="{{image.caption}}">
+					</a>
+					{{#if image.caption}}
+						<p class="imgur-caption">{{image.caption}}</p>
+					{{/if}}
+				</li>
+			{{/each}}
+			<li class="open-album-wrapper">
+				<a href="#" class="open-album" title="Album">View album</a>
+			</li>
+		</ul>
+	</script>
+	<script src='javascripts/jquery.cookie.js'></script>
+	<script src='javascripts/imagesLoaded.js'></script>
+	<script src="javascripts/spin.min.js"></script>
+	<script src="javascripts/app.js?v=7"></script>
+
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png" />
+
+</head>
+<body class="fullview">
+
+
+	<!-- Nav and Container
+	================================================== -->
+	<nav>
+		<div class="container">
+			<span class="list-icon"></span>
+			<h1 class="logo">Redditate</h1>
+			<span class="add-icon"></span>
+		</div>
+	</nav>
+	<div class="main container">
+		<div class="posts"></div>
+		<div class="loadmore-button">
+			Load Next 25
+			<div id="spinner"></div>
+		</div>
+	</div>
+
+	<div class="wash">
+		<div id="loading"></div>
+	</div>
+
+	<!-- <form class="subreddit-shortcut">
+		<fieldset class="subreddit-input">
+			<label>r/</label>
+			<input type="text"></input>
+		</fieldset>
+	</form> -->
+
+	<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-33408606-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+	</script>
+
+	<script type="text/javascript">
+	  var _gauges = _gauges || [];
+	  (function() {
+	    var t   = document.createElement('script');
+	    t.type  = 'text/javascript';
+	    t.async = true;
+	    t.id    = 'gauges-tracker';
+	    t.setAttribute('data-site-id', '50843469f5a1f5348f000019');
+	    t.src = '//secure.gaug.es/track.js';
+	    var s = document.getElementsByTagName('script')[0];
+	    s.parentNode.insertBefore(t, s);
+	  })();
+	</script>
+
+
+<!-- End Document
+================================================== -->
+</body>
+</html>
+
+
+
+
+<!--
+- Get a tiny carrot next to the current post
+- Browser test
+- Future: Make domain clickable
+- Future: Click to comments opens in a modal
+ 
